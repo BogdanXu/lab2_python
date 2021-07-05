@@ -68,4 +68,93 @@ def problem_3():
 # 4. Write a function that receives as a parameters a list of musical notes (strings), a list of moves (integers) and a start position (integer). 
 # The function will return the song composed by going though the musical notes beginning with the start position and following the moves given as parameter.
 
+# 5. Write a function that receives as parameter a matrix and will return the matrix obtained by replacing all the elements under the main diagonal with 0 (zero).
+
+def problem_5():
+    def set_zero_under_diagonal(matrix):
+        for i in range(0, len(matrix)):
+            for j in range(0, len(matrix[0])):
+                if i > j:
+                    matrix[i][j] = 0
+        return matrix
+    matrix = [ [1 for i  in range(5) ] for j in range(5)]
+
+    #printing the matrix
+    set_zero_under_diagonal(matrix)
+    for i in range(0, len(matrix)):
+        for j in range(0, len(matrix[0])):
+            print(matrix[i][j], end="")
+        print()
+
+#  6. Write a function that receives as a parameter a variable number of lists and a whole number x.
+#  Return a list containing the items that appear exactly x times in the incoming lists
+# TODO: do this again after you learn what a dictionary is and how it works
+def problem_6():
+    def count_items(x, *args):
+        frequency_of_values = []
+        found_values = []
+        for found_list in args:
+            if isinstance(found_list, list):
+                for value in found_list:
+                    if value not in found_values:
+                        found_values.append(value)
+                        frequency_of_values.append(1)
+                    else:
+                         index = found_values.index(value)
+                         frequency_of_values[index] = frequency_of_values[index] + 1
+        print("all the unique values in the lists are: ", found_values)
+        print("their frequency index is: ", frequency_of_values)
+
+        result = []
+        for i in range(0, len(frequency_of_values)):
+            if frequency_of_values[i]==x:
+                result.append(found_values[i])
+        return result
+    print(count_items(2, [4, 5, 6, 1024012, 2, 50, 1, 1, 69, "test"], [4, 5, "test", 69]))
+
+
+# 7. Write a function that receives as parameter a list of numbers (integers) and will return a tuple with 2 elements. 
+# The first element of the tuple will be the number of palindrome numbers found in the list and the second element will be the greatest palindrome number.
+def problem_7():                   
+    def palindrome_counter(number_list):
+        def palindrome_check(number):
+            number = str(number)
+            for index in range(0, len(number)//2):
+                if number[index]!=number[-1-index]:
+                    return False
+            return True
+        number_of_palindromes = 0
+        greatest_palindrome = 0
+        for number in number_list:
+            if palindrome_check(number):
+                number_of_palindromes += 1
+                if number > greatest_palindrome:
+                    greatest_palindrome = number
+        return (number_of_palindromes, greatest_palindrome)
+    print(palindrome_counter([10, 121, -121, 20, 66, 606]))
+
+#  8. Write a function that receives a number x, default value equal to 1, a list of strings, and a boolean flag set to True.
+#  For each string, generate a list containing the characters that have the ASCII code divisible by x if the flag is set to True,
+#  otherwise it should contain characters that have the ASCII code not divisible by x.
+
+def problem_8():
+    def ascii_divisor(x = 1, list=[] , flag=True):
+        result_list = []
+        for word in list:
+            word_index = list.index(word)
+            result = []
+            for char_index in range(0, len(word)):
+                if (ord(word[char_index]) % x)==0 and flag == True:
+                    print("found character", word[char_index], "which is not divisible by", x)
+                    result.append(word[char_index])
+                if (ord(word[char_index]) % x)!=0 and flag == False:
+                    print("found character", word[char_index], "which is divisible by", x)
+                    result.append(word[char_index])
+            result_list.append(result)
+        return result_list
+    print(ascii_divisor(2, ["test", "hello", "lab002"], False))
+problem_8()
+
+
+
 
