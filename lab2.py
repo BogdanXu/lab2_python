@@ -41,7 +41,7 @@ def problem_2():
     print(prime_numbers([2, 6, 20, 69, 13, 11, 4, 10, 2]))
 
 # 3. Write a function that receives as parameters two lists a and b and returns: (a intersected with b, a reunited with b, a - b, b - a)
-
+# this is redone in a more python-y way in lab3.py
 def problem_3():
     def operations_on_lists(list_1: list, list_2: list):
         intersection = []                         #intersection
